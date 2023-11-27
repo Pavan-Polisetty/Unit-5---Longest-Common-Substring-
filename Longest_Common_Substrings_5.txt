@@ -1,0 +1,25 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int lcs(int i, int j, int count, string str1, string str2) {
+    if (i == 0 || j == 0) {
+        return count;
+    }
+    if (str1[i - 1] == str2[j - 1]) {
+        count = lcs(i - 1, j - 1, count + 1, str1, str2);
+    }
+    int count1 = lcs(i, j - 1, 0, str1, str2);
+    int count2 = lcs(i - 1, j, 0, str1, str2);
+    count = max({count, count1, count2});
+    return count;
+}
+
+int main() {
+    string X = "ABAB";
+    string Y = "BABA";
+    int n = X.size();
+    int m = Y.size();
+    cout << lcs(n, m, 0, X, Y);
+    return 0;
+}
